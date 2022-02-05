@@ -1,3 +1,5 @@
+//mongoose is essentially useless for express-session ..must verify if it is actually working properly
+
 const express = require("express");
 const mongoose = require("mongoose");
 const session = require("express-session");

@@ -1,3 +1,5 @@
+//all the routes need modification.
+
 const router = require("express").Router();
 const passport = require("passport");
 const genPassword = require("../lib/passwordUtils").genPassword;
@@ -20,27 +22,22 @@ router.post(
 //if loggedin user attempts to register again, send some generic denial message or just redirect to home page or logged in page.check using req.isAuthenticated.
 
 router.post("/register", (req, res, next) => {
-  if (req.isAuthenticated) {
-    //res.send('<h2>you have already registered</h2>')
-    res.redirect("/");
-  } else {
-    const saltHash = genPassword(req.body.pw);
+  const saltHash = genPassword(req.body.pw);
 
-    const salt = saltHash.salt;
-    const hash = saltHash.hash;
+  const salt = saltHash.salt;
+  const hash = saltHash.hash;
 
-    const newUser = new User({
-      username: req.body.uname,
-      hash: hash,
-      salt: salt,
-    });
+  const newUser = new User({
+    username: req.body.uname,
+    hash: hash,
+    salt: salt,
+  });
 
-    newUser.save().then((user) => {
-      console.log(user);
-    });
+  newUser.save().then((user) => {
+    console.log(user);
+  });
 
-    res.redirect("/login");
-  }
+  res.redirect("/login");
 });
 
 /**
@@ -92,6 +89,8 @@ router.get("/logout", (req, res, next) => {
   req.logout();
   res.redirect("/protected-route");
 });
+
+//all these logged-in routes need to be modified to not allow direct access by just using the url
 
 router.get("/login-success", (req, res, next) => {
   res.send(
