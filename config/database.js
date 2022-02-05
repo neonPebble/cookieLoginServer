@@ -7,7 +7,7 @@ require("dotenv").config();
  */
 
 /**
- * Connect to MongoDB Server using the connection string in the `.env` file.  To implement this, place the following
+ * Connect to MongoDB Server using the connection string in the `.env` file.  To implement this, place a string similar to the following
  * string into the `.env` file
  *
  * DB_STRING=mongodb://<user>:<password>@localhost:27017/database_name
