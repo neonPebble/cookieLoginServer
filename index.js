@@ -3,11 +3,11 @@ const mongoose = require("mongoose");
 const session = require("express-session");
 var passport = require("passport");
 var crypto = require("crypto");
-var routes = require("./api/index.js"); // This uses the index.js file in routes folder. To change this you can change the main property in package.json(package.json inside the required folder) to something else(say apiroutes.js)
+var routes = require("./api/allroutes.js"); // This uses the index.js file in routes folder. To change this you can change the main property in package.json(package.json inside the required folder) to something else(say apiroutes.js)
 
 const connection = require("./config/database");
 
-const MongoStore = require("connect-mongo")(session);
+const MongoStore = require("connect-mongo");
 
 /**
  * -------------- GENERAL SETUP ----------------
@@ -26,9 +26,9 @@ app.use(express.urlencoded({ extended: true }));
  * -------------- SESSION SETUP ----------------
  */
 
-const sessionStore = new MongoStore({
-  mongooseConnection: connection,
-  collection: "sessions",
+const sessionStore = MongoStore.create({
+  mongoUrl: process.env.DB_STRING,
+  collectionName: "sessions",
 });
 
 app.use(
