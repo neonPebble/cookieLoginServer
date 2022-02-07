@@ -46,7 +46,7 @@ router.post("/register", (req, res, next) => {
 
 router.get("/", (req, res, next) => {
   res.send(
-    '<h1>Home</h1><p>Please <a href="/register">register</a><br>or <a href="/login>LOGIN</a>"</p>'
+    '<h1>Home</h1><p>Please <a href="/register">register</a><br>or <a href="/login">LOGIN</a></p>'
   );
 });
 
