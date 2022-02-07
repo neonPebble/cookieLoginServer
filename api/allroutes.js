@@ -51,7 +51,7 @@ router.get("/", (req, res, next) => {
 });
 
 router.get("/user", (req, res, next) => {
-  if (req.isAuthenticated) {
+  if (req.isAuthenticated()) {
     res.json({ loggedIn: true, userName: req.user.username });
   } else {
     res.json({ loggedIn: false, userName: "Guest" });
@@ -86,16 +86,24 @@ router.get("/protected-route", isAuth, (req, res, next) => {
 
 // Visiting this route logs the user out
 router.get("/logout", (req, res, next) => {
-  req.logout();
-  res.redirect("/protected-route");
+  if (req.isAuthenticated()) {
+    req.logout();
+    res.redirect("/");
+  } else {
+    res.redirect("/");
+  }
 });
 
 //all these logged-in routes need to be modified to not allow direct access by just using the url
 
 router.get("/login-success", (req, res, next) => {
-  res.send(
-    '<p>You successfully logged in. --> <a href="/protected-route">Go to protected route</a></p>'
-  );
+  if (req.isAuthenticated()) {
+    res.send(
+      '<p>You successfully logged in. --> <a href="/protected-route">Go to protected route</a></p>'
+    );
+  } else {
+    res.redirect("/login");
+  }
 });
 
 router.get("/login-failure", (req, res, next) => {
