@@ -40,6 +40,17 @@ router.post("/register", (req, res, next) => {
   res.redirect("/login");
 });
 
+/*
+    --------- fun POST routes ---------
+*/
+
+router.post("/updatenotelist", isAuth, (req, res, next) => {
+  //req.user.notes = req.body;
+  console.log(req.body);
+  // res.json({ done: true });
+  next();
+});
+
 /**
  * -------------- GET ROUTES ----------------
  */
@@ -81,7 +92,9 @@ router.get("/register", (req, res, next) => {
 });
 
 router.get("/protected-route", isAuth, (req, res, next) => {
-  res.send("You made it to the route.");
+  res.send(
+    '<h2>You made it to the route.</h2><br><p><a href="/notelist">notelist</a></p>'
+  );
 });
 
 // Visiting this route logs the user out
@@ -108,6 +121,21 @@ router.get("/login-success", (req, res, next) => {
 
 router.get("/login-failure", (req, res, next) => {
   res.send("You entered the wrong password.");
+});
+
+/*
+    --------- fun GET routes ---------
+*/
+
+// This is not working. ?!?
+
+/*router.get("/notelist", isAuth, (req, res, next) => {
+  res.sendFile(path.join(__dirname, "../listdist/index.html"));
+});
+*/
+
+router.get("/getnotelist", isAuth, (req, res, next) => {
+  res.json({ userNoteList: req.user.notes });
 });
 
 module.exports = router;
