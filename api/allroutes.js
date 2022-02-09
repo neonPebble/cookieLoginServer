@@ -47,7 +47,7 @@ router.post("/register", (req, res, next) => {
 //supposedly you need to redirect to sth after a post
 
 router.post("/updatenotelist", isAuth, (req, res, next) => {
-  req.user.notes = JSON.parse(req.body);
+  //req.user.notes = JSON.parse(req.body);
   console.log(req.body);
   res.json({ status: "done" });
   next();
@@ -139,6 +139,17 @@ router.get("/login-failure", (req, res, next) => {
 router.get("/getnotelist", isAuth, (req, res, next) => {
   console.log("tried getting notelist");
   res.json({ userNoteList: req.user.notes });
+});
+
+// remove these  last two routes when you are done
+
+app.use(
+  "/localntlist",
+  isAuth,
+  express.static(path.join(__dirname, "loclistdist"))
+);
+app.get("/localntlist", isAuth, (req, res, next) => {
+  res.sendFile(path.join(__dirname, "loclistdist", "index.html"));
 });
 
 module.exports = router;

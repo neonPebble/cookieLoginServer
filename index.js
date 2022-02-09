@@ -80,10 +80,12 @@ app.use(routes);
 // the files for whatever reason use "/<resource-location>" instead of "/notelist/<resource-location>"
 //I can modify the files manually ...but thats not how it is supposed to be done
 
-app.use("/notelist", express.static(path.join(__dirname, "listdist")));
+/*
 app.get("/notelist", isAuth, (req, res, next) => {
   res.sendFile(path.join(__dirname, "listdist", "index.html"));
 });
+*/
+app.use("/notelist", isAuth, express.static(path.join(__dirname, "listdist")));
 
 /**
  * -------------- SERVER ----------------
