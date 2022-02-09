@@ -1,6 +1,7 @@
 //all the routes need modification. Just use isAuth middleware for protected routes.
-
-const router = require("express").Router();
+const path = require("path");
+const express = require("express");
+const router = express.Router();
 const passport = require("passport");
 const genPassword = require("../lib/passwordUtils").genPassword;
 const connection = require("../config/database");
