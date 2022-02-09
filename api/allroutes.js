@@ -44,10 +44,12 @@ router.post("/register", (req, res, next) => {
     --------- fun POST routes ---------
 */
 
+//supposedly you need to redirect to sth after a post
+
 router.post("/updatenotelist", isAuth, (req, res, next) => {
-  //req.user.notes = req.body;
+  req.user.notes = JSON.parse(req.body);
   console.log(req.body);
-  // res.json({ done: true });
+  res.json({ status: "done" });
   next();
 });
 
@@ -107,7 +109,7 @@ router.get("/logout", (req, res, next) => {
   }
 });
 
-//all these logged-in routes need to be modified to not allow direct access by just using the url
+//all these logged-in routes need to be modified to not allow direct access by just using the url. also use try catch when dealing with user provided stuff
 
 router.get("/login-success", (req, res, next) => {
   if (req.isAuthenticated()) {
@@ -135,6 +137,7 @@ router.get("/login-failure", (req, res, next) => {
 */
 
 router.get("/getnotelist", isAuth, (req, res, next) => {
+  console.log("tried getting notelist");
   res.json({ userNoteList: req.user.notes });
 });
 

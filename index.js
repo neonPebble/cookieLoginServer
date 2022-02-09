@@ -1,11 +1,12 @@
 //mongoose is essentially useless for express-session ..must verify if it is actually working properly
-
+const path = require("path");
 const express = require("express");
 const mongoose = require("mongoose");
 const session = require("express-session");
 var passport = require("passport");
 var crypto = require("crypto");
 var routes = require("./api/allroutes.js"); // This uses the index.js file in routes folder. To change this you can change the main property in package.json(package.json inside the required folder) to something else(say apiroutes.js)
+const isAuth = require("./api/authmidlware.js").isAuth;
 
 const connection = require("./config/database");
 
@@ -64,9 +65,23 @@ app.use((req, res, next) => {
 /**
  * -------------- ROUTES ----------------
  */
+//just not working?? why is using on specific path not working?
+/*
+app.use("/notelist", express.static(path.join(__dirname, "listdist")));
+app.get("/notelist", isAuth, (req, res, next) => {
+  res.sendFile(path.join(__dirname, "listdist/index.html"));
+});
+*/
 
 // use  all of the routes from ./api/index.js
 app.use(routes);
+
+//app.use("/notelist",express.static("listdist"));----- this does not work probably for other resouces like css sheet etc.
+
+app.use("/notelist", express.static(path.join(__dirname, "listdist")));
+app.get("/notelist", isAuth, (req, res, next) => {
+  res.sendFile(path.join(__dirname, "listdist", "index.html"));
+});
 
 /**
  * -------------- SERVER ----------------
