@@ -142,11 +142,4 @@ router.get("/getnotelist", isAuth, (req, res, next) => {
   res.json({ userNoteList: req.user.notes });
 });
 
-// remove these  last two routes when you are done
-
-router.use("/localntlist", express.static(path.join(__dirname, "loclistdist")));
-router.get("/localntlist", (req, res, next) => {
-  res.sendFile(path.join(__dirname, "loclistdist", "index.html"));
-});
-
 module.exports = router;

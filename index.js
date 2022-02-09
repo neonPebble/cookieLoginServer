@@ -87,6 +87,13 @@ app.get("/notelist", isAuth, (req, res, next) => {
 */
 app.use("/notelist", isAuth, express.static(path.join(__dirname, "listdist")));
 
+// remove these  last two routes when you are done
+
+app.use("/localntlist", express.static(path.join(__dirname, "loclistdist")));
+app.get("/localntlist", (req, res, next) => {
+  res.sendFile(path.join(__dirname, "loclistdist", "index.html"));
+});
+
 /**
  * -------------- SERVER ----------------
  */
