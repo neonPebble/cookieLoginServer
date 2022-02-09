@@ -76,7 +76,9 @@ app.get("/notelist", isAuth, (req, res, next) => {
 // use  all of the routes from ./api/index.js
 app.use(routes);
 
-//app.use("/notelist",express.static("listdist"));----- this does not work probably for other resouces like css sheet etc.
+//app.use("/notelist",express.static("listdist"));----- this works for index.html but does not work for other resouces like css sheet javascript file etc.not working at all.
+// the files for whatever reason use "/<resource-location>" instead of "/notelist/<resource-location>"
+//I can modify the files manually ...but thats not how it is supposed to be done
 
 app.use("/notelist", express.static(path.join(__dirname, "listdist")));
 app.get("/notelist", isAuth, (req, res, next) => {
