@@ -143,12 +143,8 @@ router.get("/getnotelist", isAuth, (req, res, next) => {
 
 // remove these  last two routes when you are done
 
-app.use(
-  "/localntlist",
-  isAuth,
-  express.static(path.join(__dirname, "loclistdist"))
-);
-app.get("/localntlist", isAuth, (req, res, next) => {
+app.use("/localntlist", express.static(path.join(__dirname, "loclistdist")));
+app.get("/localntlist", (req, res, next) => {
   res.sendFile(path.join(__dirname, "loclistdist", "index.html"));
 });
 
