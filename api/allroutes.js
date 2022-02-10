@@ -48,9 +48,11 @@ router.post("/register", (req, res, next) => {
 //supposedly you need to redirect to sth after a post
 
 router.post("/updatenotelist", isAuth, (req, res, next) => {
-  //req.user.notes = JSON.parse(req.body);
+  req.user.notes = req.body;
   console.log(req.body);
-  res.json({ status: "done" });
+  // console.log(req.session);
+  // console.log(req.user);
+  res.status(201).json({ status: "done" });
   next();
 });
 

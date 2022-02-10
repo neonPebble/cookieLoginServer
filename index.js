@@ -76,16 +76,30 @@ app.get("/notelist", isAuth, (req, res, next) => {
 // use  all of the routes from ./api/index.js
 app.use(routes);
 
-//app.use("/notelist",express.static("listdist"));----- this works for index.html but does not work for other resouces like css sheet javascript file etc.not working at all.
 // the files for whatever reason use "/<resource-location>" instead of "/notelist/<resource-location>"
 //I can modify the files manually ...but thats not how it is supposed to be done
 
 /*
+express.static(root, [options])
+root - root directory from which to serve static assets
+options is an object not array.
+options example :
+const options =  {
+  dotfiles: 'ignore',
+  etag: false,
+  extensions: ['htm', 'html'],
+  index: false,
+  redirect: false,
+  setHeaders: function (res,path,stat) {
+    res.set('x-timestamp', Date.now())
+  }
+}
+*/
+app.use("/notelist", express.static(path.join(__dirname, "listdist")));
+
 app.get("/notelist", isAuth, (req, res, next) => {
   res.sendFile(path.join(__dirname, "listdist", "index.html"));
 });
-*/
-app.use("/notelist", isAuth, express.static(path.join(__dirname, "listdist")));
 
 // remove these  last two routes when you are done
 
