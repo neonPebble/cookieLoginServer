@@ -46,7 +46,7 @@ router.post("/register", (req, res, next) => {
 */
 
 //supposedly you need to redirect to sth after a post and send 201
-
+// the funny behaviour may be because of state updates being done in batch or sth similar.make sure to post the notes after state update is done.
 router.post("/updatenotelist", isAuth, (req, res, next) => {
   req.user.notes = req.body;
   console.log(req.user.notes);
