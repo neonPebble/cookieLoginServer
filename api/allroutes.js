@@ -139,13 +139,6 @@ router.get("/login-failure", (req, res, next) => {
     --------- fun GET routes ---------
 */
 
-// This is not working. ?!?
-
-/*router.get("/notelist", isAuth, (req, res, next) => {
-  res.sendFile(path.join(__dirname, "../listdist/index.html"));
-});
-*/
-
 router.get("/getnotelist", isAuth, (req, res, next) => {
   console.log("tried getting notelist");
   res.json({ userNoteList: req.user.notes });
