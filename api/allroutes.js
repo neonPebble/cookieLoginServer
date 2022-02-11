@@ -45,11 +45,14 @@ router.post("/register", (req, res, next) => {
     --------- fun POST routes ---------
 */
 
-//supposedly you need to redirect to sth after a post
+//supposedly you need to redirect to sth after a post and send 201
 
 router.post("/updatenotelist", isAuth, (req, res, next) => {
   req.user.notes = req.body;
   console.log(req.user.notes);
+
+  // seems like the user is mongoose User model instance, so has its methods
+
   req.user
     .save()
     .then(() => {
