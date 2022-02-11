@@ -1,4 +1,5 @@
 // maybe i need cors for deploying app to vercel
+// vercel is somehow altering import into require and browser console shows require not defined error
 
 //mongoose is essentially useless for express-session ..must verify if it is actually working properly
 
