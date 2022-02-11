@@ -1,4 +1,7 @@
+// maybe i need cors for deploying app to vercel
+
 //mongoose is essentially useless for express-session ..must verify if it is actually working properly
+
 const path = require("path");
 const express = require("express");
 const mongoose = require("mongoose");
