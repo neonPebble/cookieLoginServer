@@ -49,7 +49,8 @@ router.post("/register", (req, res, next) => {
 
 router.post("/updatenotelist", isAuth, (req, res, next) => {
   req.user.notes = req.body;
-  console.log(req.body);
+  console.log(req.user.notes);
+  //console.log(req.body);
   // console.log(req.session);
   // console.log(req.user);
   res.status(201).json({ status: "done" });

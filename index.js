@@ -95,10 +95,10 @@ const options =  {
   }
 }
 */
-app.use("/notelist", express.static(path.join(__dirname, "listdist")));
+app.use("/notelist", express.static(path.join(__dirname, "listdista")));
 
 app.get("/notelist", isAuth, (req, res, next) => {
-  res.sendFile(path.join(__dirname, "listdist", "index.html"));
+  res.sendFile(path.join(__dirname, "listdista", "index.html"));
 });
 
 // remove these  last two routes when you are done
