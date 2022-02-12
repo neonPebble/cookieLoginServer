@@ -80,7 +80,7 @@ app.get("/notelist", isAuth, (req, res, next) => {
 // use  all of the routes from ./api/index.js
 app.use(routes);
 
-// the files for whatever reason use "/<resource-location>" instead of "/notelist/<resource-location>"
+// the html file for whatever reason uses "/<resource-location>" instead of "/notelist/<resource-location>"
 //I can modify the files manually ...but thats not how it is supposed to be done
 
 /*
@@ -99,6 +99,10 @@ const options =  {
   }
 }
 */
+
+// --------- WHEN NOT DEPLOYING TO VERCEL UNCOMMENT ---------
+
+/*
 app.use("/notelist", express.static(path.join(__dirname, "public/listdista")));
 
 app.get("/notelist", isAuth, (req, res, next) => {
@@ -111,6 +115,21 @@ app.use(
   "/localntlist",
   express.static(path.join(__dirname, "public/loclistdist"))
 );
+app.get("/localntlist", (req, res, next) => {
+  res.sendFile(path.join(__dirname, "public/loclistdist", "index.html"));
+});
+*/
+
+// -------- WHEN NOT DEPLOYING TO VERCEL COMMENT OUT --------
+
+//the static files with their directories  were put in  ".output/static"  directory
+
+app.get("/notelist", isAuth, (req, res, next) => {
+  res.sendFile(path.join(__dirname, "public/listdista", "index.html"));
+});
+
+// remove the  last route when you are done
+
 app.get("/localntlist", (req, res, next) => {
   res.sendFile(path.join(__dirname, "public/loclistdist", "index.html"));
 });
