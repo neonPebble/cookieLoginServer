@@ -124,11 +124,20 @@ app.get("/localntlist", (req, res, next) => {
 
 //the static files with their directories  were put in  ".output/static"  directory
 
+app.use(
+  "/public/listdista",
+  express.static(path.join(__dirname, ".output/static/public/listdista"))
+);
 app.get("/notelist", isAuth, (req, res, next) => {
   res.sendFile(path.join(__dirname, "vercelpages/listdista", "index.html"));
 });
 
-// remove the  last route when you are done
+// remove these  last routes when you are done
+
+app.use(
+  "/public/loclistdist",
+  express.static(path.join(__dirname, ".output/static/public/loclistdist"))
+);
 
 app.get("/localntlist", (req, res, next) => {
   res.sendFile(path.join(__dirname, "vercelpages/loclistdist", "index.html"));
