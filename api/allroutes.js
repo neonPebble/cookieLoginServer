@@ -38,7 +38,8 @@ router.post("/register", (req, res, next) => {
     console.log(user);
   });
 
-  res.redirect("/login");
+  // res.redirect("/login");
+  res.status(201).json({ status: "done" });
 });
 
 /*
@@ -51,7 +52,7 @@ router.post("/updatenotelist", isAuth, (req, res, next) => {
   req.user.notes = req.body;
   console.log(req.user.notes);
 
-  // seems like the user is mongoose User model instance, so has its methods
+  // seems like the user is a mongoose User model instance, so has its methods
 
   req.user
     .save()
