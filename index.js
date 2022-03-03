@@ -1,4 +1,4 @@
-// maybe i need cors for deploying app to vercel
+//  need cors
 // vercel is somehow altering import into require and browser console shows require not defined error. it even modifies stuff inside .output/static that its supposed to not modify. so I wont be using vercel again for full stack projects
 
 //mongoose is essentially useless for express-session ..must verify if it is actually working properly
@@ -60,22 +60,15 @@ require("./config/passport");
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use((req, res, next) => {
-  // console.log(req.session);
-  // console.log(req.user);
+/*app.use((req, res, next) => {
+   console.log(req.session);
+   console.log(req.user);
   next();
-});
+});*/
 
 /**
  * -------------- ROUTES ----------------
  */
-//just not working?? why is using on specific path not working?
-/*
-app.use("/notelist", express.static(path.join(__dirname, "listdist")));
-app.get("/notelist", isAuth, (req, res, next) => {
-  res.sendFile(path.join(__dirname, "listdist/index.html"));
-});
-*/
 
 // use  all of the routes from ./api/index.js
 app.use(routes);

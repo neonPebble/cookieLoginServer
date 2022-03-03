@@ -7,7 +7,7 @@ const genPassword = require("../lib/passwordUtils").genPassword;
 const connection = require("../config/database");
 const User = connection.models.User;
 const isAuth = require("./authmidlware.js").isAuth;
-
+const searchAnimIndex = require("../lib/searchUtils").searchAnimIndex;
 /**
  * -------------- POST ROUTES ----------------
  */
@@ -32,13 +32,16 @@ router.post("/register", (req, res, next) => {
     username: req.body.uname,
     hash: hash,
     salt: salt,
+    notes: [],
+    animelist: [],
   });
 
   newUser.save().then((user) => {
     console.log(user);
   });
 
-  res.redirect("/login");
+  // res.redirect("/login");
+  res.status(201).json({ status: "done" });
 });
 
 /*
@@ -51,7 +54,35 @@ router.post("/updatenotelist", isAuth, (req, res, next) => {
   req.user.notes = req.body;
   console.log(req.user.notes);
 
-  // seems like the user is mongoose User model instance, so has its methods
+  // seems like the user is a mongoose User model instance, so has its methods
+
+  req.user
+    .save()
+    .then(() => {
+      res.status(201).json({ status: "done" });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+});
+
+router.post("/remAnime", isAuth, (req, res, next) => {
+  const remId = req.body.aniId;
+  const remIndex = searchAnimIndex(req.user.animelist, remId);
+  req.user.anilist.splice(remIndex, 1);
+  req.user
+    .save()
+    .then(() => {
+      res.status(201).json({ status: "done" });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+});
+
+router.post("/addAnime", isAuth, (req, res, next) => {
+  const newAnime = req.body;
+  req.user.animelist.push(newAnime);
 
   req.user
     .save()
@@ -142,6 +173,10 @@ router.get("/login-failure", (req, res, next) => {
 router.get("/getnotelist", isAuth, (req, res, next) => {
   console.log("tried getting notelist");
   res.json({ userNoteList: req.user.notes });
+});
+
+router.get("/useranimelist", (req, res, next) => {
+  res.send(req.user.animelist);
 });
 
 module.exports = router;
