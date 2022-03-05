@@ -156,7 +156,7 @@ router.get("/login-success", (req, res, next) => {
   if (req.isAuthenticated()) {
     res.json({ loggedIn: true, descr: "You have successfully logged in" });
   } else {
-    res.redirect("/login");
+    res.json({ loggedIn: false, descr: "Incorrect credentials" });
   }
 });
 

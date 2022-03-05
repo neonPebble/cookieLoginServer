@@ -94,39 +94,6 @@ const options =  {
 }
 */
 
-// --------- WHEN NOT DEPLOYING TO VERCEL UNCOMMENT ---------
-
-app.use(
-  "/notelist",
-  express.static(path.join(__dirname, "public/static/listdista"))
-);
-
-app.get("/notelist", isAuth, (req, res, next) => {
-  res.sendFile(path.join(__dirname, "public/static/listdista", "index.html"));
-});
-
-// remove these  last two routes when you are done
-
-app.use(
-  "/localntlist",
-  express.static(path.join(__dirname, "public/static/loclistdist"))
-);
-app.get("/localntlist", (req, res, next) => {
-  res.sendFile(path.join(__dirname, "public/static/loclistdist", "index.html"));
-});
-
-// -------- WHEN NOT DEPLOYING TO VERCEL COMMENT OUT --------
-
-//the static files with their directories  were put in  ".output/static"  directory
-/*
-app.get("/notelist", isAuth, (req, res, next) => {
-  res.sendFile(path.join(__dirname, "vercelpages/listdista", "index.html"));
-});
-
-app.get("/localntlist", (req, res, next) => {
-  res.sendFile(path.join(__dirname, "vercelpages/loclistdist", "index.html"));
-});
-*/
 /**
  * -------------- SERVER ----------------
  */
