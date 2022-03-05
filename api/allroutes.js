@@ -49,7 +49,7 @@ router.post("/register", (req, res, next) => {
 */
 
 //supposedly you need to redirect to sth after a post and send 201
-// the funny behaviour may be because of state updates being done in batch or sth similar.make sure to post the notes after state update is done.
+
 router.post("/updatenotelist", isAuth, (req, res, next) => {
   req.user.notes = req.body;
   console.log(req.user.notes);
@@ -144,9 +144,9 @@ router.get("/protected-route", isAuth, (req, res, next) => {
 router.get("/logout", (req, res, next) => {
   if (req.isAuthenticated()) {
     req.logout();
-    res.redirect("/");
+    res.redirect("/"); // modify to frontend home
   } else {
-    res.redirect("/");
+    res.redirect("/"); // modify to frontend home
   }
 });
 
@@ -154,16 +154,14 @@ router.get("/logout", (req, res, next) => {
 
 router.get("/login-success", (req, res, next) => {
   if (req.isAuthenticated()) {
-    res.send(
-      '<p>You successfully logged in. --> <a href="/protected-route">Go to protected route</a></p>'
-    );
+    res.json({ loggedIn: true, descr: "You have successfully logged in" });
   } else {
     res.redirect("/login");
   }
 });
 
 router.get("/login-failure", (req, res, next) => {
-  res.send("You entered the wrong password.");
+  res.json({ loggedIn: false, descr: "Incorrect credentials" });
 });
 
 /*
