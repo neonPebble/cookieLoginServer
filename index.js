@@ -3,6 +3,7 @@
 
 //mongoose is essentially useless for express-session ..must verify if it is actually working properly
 
+const cors = require("cors");
 const path = require("path");
 const express = require("express");
 const mongoose = require("mongoose");
@@ -25,7 +26,7 @@ require("dotenv").config();
 
 // Create the Express application
 var app = express();
-
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
