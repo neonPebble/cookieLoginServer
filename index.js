@@ -32,6 +32,7 @@ const corsOptions = {
     "https://animelist-and-notelist.vercel.app",
     "https://animelist-and-notelist-git-main-neonpebble.vercel.app",
     "https://animelist-and-notelist-neonpebble.vercel.app",
+    "https://animelist-and-notelist-4cw50y0ss-neonpebble.vercel.app",
   ],
   credentials: true,
 };
