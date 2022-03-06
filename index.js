@@ -57,8 +57,8 @@ app.use(
     store: sessionStore,
     cookie: {
       maxAge: 1000 * 60 * 60 * 24, // Equals 1 day (im mili seconds)
-      secure: true, // might cause trouble?
       sameSite: "none",
+      secure: true, // might cause trouble?
     },
   })
 );
