@@ -174,7 +174,10 @@ router.get("/getnotelist", isAuth, (req, res, next) => {
 });
 
 router.get("/useranimelist", (req, res, next) => {
-  res.send(req.user.animelist);
+  if (req.isAuthenticated) {
+    res.json(req.user.animelist);
+  }
+  res.send([]);
 });
 
 module.exports = router;
