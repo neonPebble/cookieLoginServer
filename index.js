@@ -27,7 +27,14 @@ require("dotenv").config();
 // Create the Express application
 var app = express();
 
-const corsOptions = { origin: "*", credentials: "true" };
+const corsOptions = {
+  origin: [
+    "https://animelist-and-notelist.vercel.app/",
+    "https://animelist-and-notelist-git-main-neonpebble.vercel.app/",
+    "https://animelist-and-notelist-neonpebble.vercel.app/",
+  ],
+  credentials: "true",
+};
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
