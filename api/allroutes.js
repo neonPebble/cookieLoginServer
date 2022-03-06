@@ -16,7 +16,7 @@ router.post(
   "/login",
   passport.authenticate("local", {
     failureRedirect: "/login-failure",
-    successRedirect: "login-success",
+    successRedirect: "/login-success",
   })
 );
 
