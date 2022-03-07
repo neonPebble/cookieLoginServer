@@ -1,5 +1,5 @@
 {
-  "name": "cookieLoginServer",
+  "name": "cookie-login-server",
   "version": "1.0.0",
   "description": "A register/login server using express-session, passport-local.",
   "main": "index.js",
