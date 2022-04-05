@@ -106,6 +106,15 @@ const options =  {
 }
 */
 
+app.use(
+  "/localntlist",
+  express.static(path.join(__dirname, "public/static/locllistdist"))
+);
+
+app.get("/localntlist", (req, res, next) => {
+  res.sendFile(path.join(__dirname, "public/static/locldist", "index.html"));
+});
+
 /**
  * -------------- SERVER ----------------
  */
