@@ -108,11 +108,11 @@ const options =  {
 
 app.use(
   "/localntlist",
-  express.static(path.join(__dirname, "public/static/locllistdist"))
+  express.static(path.join(__dirname, "public/static/loclistdist"))
 );
 
 app.get("/localntlist", (req, res, next) => {
-  res.sendFile(path.join(__dirname, "public/static/locldist", "index.html"));
+  res.sendFile(path.join(__dirname, "public/static/loclistdist", "index.html"));
 });
 
 /**
